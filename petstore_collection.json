@@ -1,0 +1,264 @@
+{
+  "info": {
+    "_postman_id": "f7c28d02-44f2-44ef-805c-5eb1339655ae",
+    "name": "Petstore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48719006",
+    "_collection_link": "https://go.postman.co/collection/48719006-f7c28d02-44f2-44ef-805c-5eb1339655ae?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Создать питомца",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Проверка на статус код - 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Ответ содержит обязательные поля\", function () {\r",
+              "    pm.expect(jsonData).to.have.property(\"id\");\r",
+              "    pm.expect(jsonData).to.have.property(\"name\");\r",
+              "    pm.expect(jsonData).to.have.property(\"status\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Имя питомца корректное\", function() {\r",
+              "    pm.expect(jsonData.name).to.eql('Leo');\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Статус питомца available\", function () {\r",
+              "    pm.expect(jsonData.status).to.eql(\"available\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"ID питомца существует\", function () {\r",
+              "    pm.expect(jsonData.id).to.not.be.null;\r",
+              "});\r",
+              "\r",
+              "pm.environment.set(\"pet_id\", jsonData.id);    \r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"pet_id\", Math.floor(Math.random() * 1000000));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": {{pet_id}},\r\n  \"category\": {\r\n    \"id\": 2,\r\n    \"name\": \"cats\"\r\n  },\r\n  \"name\": \"Leo\",\r\n  \"tags\": [\r\n    {\r\n      \"id\": 2,\r\n      \"name\": \"cute\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/pet",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получить питомца по id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Статус код = 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"ID является числом\", function () {\r",
+              "    pm.expect(jsonData.id).to.be.a(\"number\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Имя является строкой\", function () {\r",
+              "    pm.expect(jsonData.name).to.be.a(\"string\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"ID питомца совпадает\", function () {\r",
+              "    pm.expect(jsonData.id).to.eql(Number(pm.environment.get(\"pet_id\")));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Имя питомца Leo\", function () {\r",
+              "    pm.expect(jsonData.name).to.eql(\"Leo\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Статус available\", function () {\r",
+              "    pm.expect(jsonData.status).to.eql(\"available\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/{{pet_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "{{pet_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Обновить данные питомца",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Статус код = 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Имя питомца обновилось\", function () {\r",
+              "    pm.expect(jsonData.name).to.eql(\"LeoUpdated\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Статус питомца sold\", function () {\r",
+              "    pm.expect(jsonData.status).to.eql(\"sold\");\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": {{pet_id}},\r\n  \"category\": {\r\n    \"id\": 2,\r\n    \"name\": \"cats\"\r\n  },\r\n  \"name\": \"LeoUpdated\",\r\n  \"tags\": [\r\n    {\r\n      \"id\": 2,\r\n      \"name\": \"cute\"\r\n    }\r\n  ],\r\n  \"status\": \"sold\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/pet",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Удалить питомца",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус код = 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Время ответа меньше 2000 мс\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/{{pet_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "{{pet_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получить питомца с несуществующим ID (negative test)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Статус код 404\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/888888888",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "888888888"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

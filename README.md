@@ -70,4 +70,4 @@
 ---
 ### 📫 Связь со мной:
 - **Telegram:** []
-- **Email:** []
+- **Email:** [a.kiripro@gmail.com]

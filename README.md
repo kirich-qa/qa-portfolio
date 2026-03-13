@@ -69,5 +69,5 @@
 
 ---
 ### 📫 Связь со мной:
-- **Telegram:** t.me/kirichpro
+- **Telegram:** https://t.me/kirichpro
 - **Email:** a.kiripro@gmail.com

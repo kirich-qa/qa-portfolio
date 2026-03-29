@@ -46,10 +46,13 @@
 ## 🛠 Инструменты и навыки
 
 ### Инструменты:
-- **API:** Postman, Swagger
-- **Web:** Chrome DevTools
-- **Platforms**: GitHub
-- **Documentation:** Google Sheets 
+- API: Postman, Swagger
+- Веб-тестирование: Chrome DevTools, Playwright
+- Автоматизация: Playwright (UI), Postman (API)
+- Язык программирования: Python
+- Платформы: GitHub
+- Документация: Google Sheets
+- Базы данных: MySQL (SQL)
 
 ### Навыки (Skills):
 - Функциональное тестирование веб-приложений

@@ -22,7 +22,7 @@
 
 **Тестовая документация:**
 - [📄 Чек-лист](Stellarium_Checklist.pdf)
-- [📄 Тест-кейсы](Stellarium_Test_Cases.pdf)
+- [📄 Тест-кейсы (18 сценариев)](Stellarium_Test_Cases.pdf)
 - [📄 Test Summary Report](Stellarium_Test_Summary_Report.pdf)
 - [🐞 Баг-репорты (6 дефектов)](Stellarium_Bug_Reports.pdf)
 

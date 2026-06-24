@@ -148,7 +148,7 @@
 - [📄 Тест-кейсы](test_cases_yandex_mail.pdf)
 - [📄 Тестовый набор (Test Set)](test_set_yandex_mail.pdf)
 
-
+---
 
 ## 🛠 Инструменты и навыки
 
